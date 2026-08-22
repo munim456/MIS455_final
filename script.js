@@ -153,4 +153,12 @@
     `;
     modal.showModal();
   }
+  unction escapeHtml(value) {
+    if (value === undefined || value === null) return "";
+    const div = document.createElement("div");
+    div.textContent = String(value);
+    return div.innerHTML;
+  }
+})();
+
 
