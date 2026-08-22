@@ -128,4 +128,29 @@
         </div>
       </div>
     `;
+    card.querySelector(".recipe-card__link").addEventListener("click", () => openModal(meal));
+
+    return card;
+  }
+
+  function openModal(meal) {
+    modalBody.innerHTML = `
+      <img src="${escapeHtml(meal.strMealThumb)}" alt="${escapeHtml(meal.strMeal)}" />
+      <p style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-soft);">
+        MEAL ID ${escapeHtml(meal.idMeal)}
+      </p>
+      <h2>${escapeHtml(meal.strMeal)}</h2>
+      <div class="recipe-modal__meta">
+        ${meal.strCategory ? `<span class="tag tag--category">${escapeHtml(meal.strCategory)}</span>` : ""}
+        ${meal.strArea ? `<span class="tag tag--area">${escapeHtml(meal.strArea)}</span>` : ""}
+      </div>
+      <p class="recipe-modal__instructions">${escapeHtml(meal.strInstructions || "No instructions provided.")}</p>
+      ${
+        meal.strYoutube
+          ? `<p><a href="${escapeHtml(meal.strYoutube)}" target="_blank" rel="noopener">Watch on YouTube ↗</a></p>`
+          : ""
+      }
+    `;
+    modal.showModal();
+  }
 
