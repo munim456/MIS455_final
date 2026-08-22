@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Recipe Box — MealDB Search</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="brand">
+        <span class="brand__mark" aria-hidden="true">🗂️</span>
+        <span class="brand__text">
+          <span class="brand__title">The Recipe Box</span>
+          <span class="brand__subtitle">a hand-filed search of TheMealDB</span>
+        </span>
+      </a>
+      <nav class="site-header__nav" aria-label="Primary">
+        <a href="https://www.themealdb.com/" target="_blank" rel="noopener">Powered by TheMealDB</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <main id="top">
+    <section class="search-slot" aria-labelledby="search-heading">
+      <div class="search-slot__inner">
+        <h1 id="search-heading">What are you craving?</h1>
+        <p class="search-slot__hint">Type a dish, an ingredient, or just a word — we'll flip through the box.</p>
+
+        <form id="search-form" class="search-form" autocomplete="off">
+          <label for="search-input" class="sr-only">Search for a meal</label>
+          <input
+            id="search-input"
+            name="search"
+            type="text"
+            placeholder="e.g. chicken, arrabiata, cake…"
+            required
+          />
+          <button type="submit" class="btn btn--primary">
+            <span>Search</span>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <section class="results" aria-live="polite">
+      <div class="results__inner">
+        <p id="status-message" class="status-message"></p>
+        <div id="results-grid" class="results-grid"></div>
+        <div class="show-all-wrap">
+          <button id="show-all-btn" class="btn btn--secondary" hidden>
+            Show All Cards
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  
+  <dialog id="recipe-modal" class="recipe-modal">
+    <div class="recipe-modal__content">
+      <button id="modal-close" class="recipe-modal__close" aria-label="Close">&times;</button>
+      <div id="modal-body"></div>
+    </div>
+  </dialog>
+
+  
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <p>&copy; <span id="year"></span> The Recipe Box. Recipe data courtesy of
+        <a href="https://www.themealdb.com/" target="_blank" rel="noopener">TheMealDB</a>.
+      </p>
+      <p class="site-footer__note">A small demo project — not affiliated with TheMealDB.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
