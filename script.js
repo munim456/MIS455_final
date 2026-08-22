@@ -103,3 +103,29 @@
     const hasMore = meals.length > INITIAL_VISIBLE;
     showAllBtn.hidden = !(hasMore && !revealAll);
   }
+  function buildCard(meal) {
+    const card = document.createElement("article");
+    card.className = "recipe-card";
+
+    const instructions = (meal.strInstructions || "").trim();
+    const shortInstructions =
+      instructions.length > 220 ? `${instructions.slice(0, 220).trim()}…` : instructions;
+
+    card.innerHTML = `
+      <div class="recipe-card__image-wrap">
+        <img src="${escapeHtml(meal.strMealThumb)}" alt="${escapeHtml(meal.strMeal)}" loading="lazy" />
+        <span class="recipe-card__id">ID ${escapeHtml(meal.idMeal)}</span>
+      </div>
+      <div class="recipe-card__body">
+        <h3 class="recipe-card__name">${escapeHtml(meal.strMeal)}</h3>
+        <div class="recipe-card__tags">
+          ${meal.strCategory ? `<span class="tag tag--category">${escapeHtml(meal.strCategory)}</span>` : ""}
+          ${meal.strArea ? `<span class="tag tag--area">${escapeHtml(meal.strArea)}</span>` : ""}
+        </div>
+        <p class="recipe-card__instructions">${escapeHtml(shortInstructions) || "No instructions provided."}</p>
+        <div class="recipe-card__footer">
+          <button type="button" class="recipe-card__link">Read full recipe →</button>
+        </div>
+      </div>
+    `;
+
