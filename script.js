@@ -1,0 +1,27 @@
+
+(() => {
+  "use strict";
+
+  const API_BASE = "https://www.themealdb.com/api/json/v1/1/search.php";
+  const INITIAL_VISIBLE = 5;
+
+  const form = document.getElementById("search-form");
+  const input = document.getElementById("search-input");
+  const grid = document.getElementById("results-grid");
+  const statusMessage = document.getElementById("status-message");
+  const showAllBtn = document.getElementById("show-all-btn");
+  const modal = document.getElementById("recipe-modal");
+  const modalBody = document.getElementById("modal-body");
+  const modalClose = document.getElementById("modal-close");
+
+  
+  let currentMeals = [];
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const query = input.value.trim();
+    if (!query) return;
+    runSearch(query);
+  });
