@@ -32,12 +32,12 @@
 
   modalClose.addEventListener("click", () => modal.close());
   modal.addEventListener("click", (event) => {
-    // click on the backdrop closes the modal
+    
     if (event.target === modal) modal.close();
   });
 
   async function runSearch(query) {
-    // 6. Erase previous results and start fresh from the top of the page
+    
     resetResults();
     window.scrollTo({ top: 0, behavior: "smooth" });
     setStatus(`Flipping through the box for “${query}”…`);
@@ -70,4 +70,36 @@
         "error"
       );
     }
+  }
+  function resetResults() {
+    grid.innerHTML = "";
+    showAllBtn.hidden = true;
+    currentMeals = [];
+    setStatus("");
+  }
+
+  function setStatus(message, tone = "normal") {
+    statusMessage.textContent = message;
+    if (tone === "error") {
+      statusMessage.setAttribute("data-tone", "error");
+    } else {
+      statusMessage.removeAttribute("data-tone");
+    }
+  }
+
+  function renderMeals(meals, { revealAll }) {
+    grid.innerHTML = "";
+
+    const visibleMeals = revealAll ? meals : meals.slice(0, INITIAL_VISIBLE);
+    const fragment = document.createDocumentFragment();
+
+    visibleMeals.forEach((meal) => {
+      fragment.appendChild(buildCard(meal));
+    });
+
+    grid.appendChild(fragment);
+
+    // 5. Show "SHOW ALL" only when there are more than 5 results and they're hidden
+    const hasMore = meals.length > INITIAL_VISIBLE;
+    showAllBtn.hidden = !(hasMore && !revealAll);
   }
